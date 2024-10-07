@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Este é um app de exemplo para mostrar a previsão do tempo."
+        android:text="Este é um app para mostrar a previsão do tempo."
         android:paddingTop="10dp"
         android:textSize="16sp" />
 </LinearLayout>

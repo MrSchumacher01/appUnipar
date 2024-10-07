@@ -32,5 +32,8 @@
             android:theme="@style/Theme.AppUnipar">
         </activity>
 
+        <activity android:name=".AboutActivity" />
+
+
     </application>
 </manifest>
