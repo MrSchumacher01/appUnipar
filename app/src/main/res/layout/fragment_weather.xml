@@ -6,18 +6,31 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/temperatureTextView"
-        android:layout_width="wrap_content"
+    <!-- Campo de texto para inserir o nome da cidade -->
+    <EditText
+        android:id="@+id/cityEditText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Temperatura"
-        android:textSize="24sp" />
+        android:hint="Digite o nome da cidade"
+        android:inputType="text"
+        android:padding="12dp" />
 
-    <TextView
-        android:id="@+id/descriptionTextView"
+    <!-- Botão para buscar a previsão -->
+    <Button
+        android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Descrição"
-        android:textSize="18sp" />
+        android:text="Buscar Previsão"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Texto que exibe a previsão do tempo -->
+    <TextView
+        android:id="@+id/weatherInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carregando previsão do tempo..."
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:layout_marginTop="20dp" />
 
 </LinearLayout>
