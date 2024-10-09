@@ -1,3 +1,10 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
     <string name="app_name">appUnipar</string>
+    <string name="text_to_set">Texto para exibir</string>
+    <string name="description_qr_code">Escanear QR Code</string>
+    <string name="hint_city">Digite o nome da cidade</string>
+
+
 </resources>
