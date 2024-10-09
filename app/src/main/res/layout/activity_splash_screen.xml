@@ -6,9 +6,11 @@
     android:gravity="center">
 
     <ImageView
-        android:id="@+id/splash_logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_foreground"
-        android:contentDescription="@string/app_name"/>
+        android:id="@+id/splashImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ceu"
+        android:contentDescription="splashImage" />
+
 </RelativeLayout>

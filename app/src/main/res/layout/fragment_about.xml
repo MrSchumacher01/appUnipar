@@ -3,18 +3,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sobre o Aplicativo"
-        android:textSize="18sp" />
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:src="@drawable/foto_marcos"
+        android:contentDescription="Foto do perfil"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="-100dp"/>
 
     <TextView
+        android:id="@+id/name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Este é um app para mostrar a previsão do tempo."
-        android:paddingTop="10dp"
+        android:text="Marcos Roberto Schumacher"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/ra_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RA: 09037296"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/course_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Curso: Análise e Desenvolvimento de Sistemas"
         android:textSize="16sp" />
+
 </LinearLayout>
