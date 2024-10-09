@@ -46,7 +46,8 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         app:srcCompat="@drawable/ic_qr_code"
-        android:contentDescription="@string/description_qr_code"
+        android:contentDescription="Botão de QR Code"
         app:fabSize="normal" />
+
 
 </LinearLayout>

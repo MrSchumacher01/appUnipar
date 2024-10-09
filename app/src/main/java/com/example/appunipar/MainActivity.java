@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         TabPagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
     }
 
     @Override
@@ -37,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_qr) {
-            // Inicializar o scanner do ZXing
-            IntentIntegrator integrator = new IntentIntegrator(this);
-            integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-            integrator.setPrompt("Escaneie o QR Code");
-            integrator.setBeepEnabled(true);
-            integrator.initiateScan(); // Inicia o scanner
+        int id = item.getItemId();
+
+        if (id == R.id.action_personal_info) {
+            // Abrir nova tela com as informações pessoais
+            Intent intent = new Intent(MainActivity.this, PersonalInfoActivity.class);
+            startActivity(intent);
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
