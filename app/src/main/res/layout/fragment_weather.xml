@@ -45,4 +45,5 @@
         android:contentDescription="Botão de QR Code"
         app:fabSize="normal" />
 
+
 </LinearLayout>

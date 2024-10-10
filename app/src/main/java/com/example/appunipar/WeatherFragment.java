@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
@@ -40,6 +41,16 @@ public class WeatherFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
+
+        // Inicializando o FloatingActionButton
+        FloatingActionButton fab = view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Inicia o scanner de QR code
+                startQRScanner();
+            }
+        });
 
         // Inicializando o RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewWeather);
@@ -122,6 +133,8 @@ public class WeatherFragment extends Fragment {
     public void startQRScanner() {
         ScanOptions options = new ScanOptions();
         options.setPrompt("Escaneie o QR Code");
+        options.setBeepEnabled(true);
+        options.setBarcodeImageEnabled(true);
         barcodeLauncher.launch(options);
     }
 }
