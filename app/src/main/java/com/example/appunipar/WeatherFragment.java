@@ -6,15 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.zxing.integration.android.IntentIntegrator;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
+
 import androidx.activity.result.ActivityResultLauncher;
 
 import org.json.JSONObject;
@@ -23,10 +24,14 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WeatherFragment extends Fragment {
 
-    private TextView weatherInfoTextView;
+    private RecyclerView recyclerView;
+    private WeatherAdapter weatherAdapter;
+    private List<WeatherData> weatherList;
     private EditText cityEditText;
     private Button searchButton;
     private ActivityResultLauncher<ScanOptions> barcodeLauncher;
@@ -36,22 +41,14 @@ public class WeatherFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_weather, container, false);
 
-        // Inicializa o FloatingActionButton
-        FloatingActionButton fab = view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Inicia o scanner de QR code
-                IntentIntegrator integrator = IntentIntegrator.forSupportFragment(WeatherFragment.this);
-                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
-                integrator.setPrompt("Escaneie o QR Code");
-                integrator.setBeepEnabled(true);
-                integrator.initiateScan();
-            }
-        });
+        // Inicializando o RecyclerView
+        recyclerView = view.findViewById(R.id.recyclerViewWeather);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        weatherList = new ArrayList<>();
+        weatherAdapter = new WeatherAdapter(weatherList);
+        recyclerView.setAdapter(weatherAdapter);
 
         // Inicializando os componentes
-        weatherInfoTextView = view.findViewById(R.id.weatherInfoTextView);
         cityEditText = view.findViewById(R.id.cityEditText);
         searchButton = view.findViewById(R.id.searchButton);
 
@@ -77,11 +74,8 @@ public class WeatherFragment extends Fragment {
     private void getWeatherData(String cidade) {
         new Thread(() -> {
             try {
-                // Mostra o texto de carregamento enquanto busca os dados
-                getActivity().runOnUiThread(() -> weatherInfoTextView.setText("Carregando previsão do tempo..."));
-
                 // URL da API com a chave e a cidade
-                String apiKey = "6f1876a8439eb59d77020df82a7b6300\n"; // Substitua pela sua chave de API
+                String apiKey = "6f1876a8439eb59d77020df82a7b6300";
                 String urlString = "https://api.openweathermap.org/data/2.5/weather?q=" + cidade + "&appid=" + apiKey + "&units=metric";
 
                 // Abre a conexão com a API
@@ -103,18 +97,26 @@ public class WeatherFragment extends Fragment {
                 JSONObject jsonObject = new JSONObject(jsonResponse);
                 JSONObject main = jsonObject.getJSONObject("main");
                 double temperature = main.getDouble("temp");
+                String description = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
 
-                // Atualiza o TextView com a temperatura
+                // Adiciona os dados na lista
+                weatherList.add(new WeatherData(cidade, temperature, description));
+
+                // Atualiza o RecyclerView
                 getActivity().runOnUiThread(() -> {
-                    weatherInfoTextView.setText("Temperatura em " + cidade + ": " + temperature + "ºC");
+                    weatherAdapter.notifyDataSetChanged();
                 });
+
             } catch (Exception e) {
                 e.printStackTrace();
-                getActivity().runOnUiThread(() -> weatherInfoTextView.setText("Erro ao buscar a previsão do tempo."));
+                getActivity().runOnUiThread(() -> {
+                    // Mostra uma mensagem de erro
+                    weatherList.add(new WeatherData(cidade, 0.0, "Erro ao buscar previsão."));
+                    weatherAdapter.notifyDataSetChanged();
+                });
             }
         }).start();
     }
-
 
     // Função para iniciar o scanner do QR Code
     public void startQRScanner() {
@@ -122,5 +124,4 @@ public class WeatherFragment extends Fragment {
         options.setPrompt("Escaneie o QR Code");
         barcodeLauncher.launch(options);
     }
-
 }
