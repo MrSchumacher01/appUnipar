@@ -37,7 +37,6 @@ public class WeatherAdapter extends RecyclerView.Adapter<WeatherAdapter.WeatherV
     }
 
     static class WeatherViewHolder extends RecyclerView.ViewHolder {
-
         TextView cityName, temperature, weatherDescription;
 
         public WeatherViewHolder(@NonNull View itemView) {

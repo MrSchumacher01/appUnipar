@@ -1,22 +1,22 @@
 package com.example.appunipar;
 
 public class WeatherData {
-    private String cityName;
-    private double temperature;
+    private String city;
+    private double temp;
     private String description;
 
-    public WeatherData(String cityName, double temperature, String description) {
-        this.cityName = cityName;
-        this.temperature = temperature;
+    public WeatherData(String city, double temp, String description) {
+        this.city = city;
+        this.temp = temp;
         this.description = description;
     }
 
     public String getCityName() {
-        return cityName;
+        return city;
     }
 
     public double getTemperature() {
-        return temperature;
+        return temp;
     }
 
     public String getDescription() {
