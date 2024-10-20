@@ -2,52 +2,70 @@ package com.example.appunipar;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import com.google.android.material.navigation.NavigationView;
+import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
+import com.google.android.material.tabs.TabLayoutMediator;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Configurando o TabLayout e ViewPager para as abas
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
-        ViewPager viewPager = findViewById(R.id.viewPager);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
 
-        TabPagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager());
+        // Configuração do DrawerLayout e NavigationView
+        drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        // Configuração do ViewPager2
+        ViewPager2 viewPager = findViewById(R.id.viewPager);
+        TabPagerAdapter adapter = new TabPagerAdapter(this);
         viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
 
+        // Configuração do TabLayout
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
+            if (position == 0) {
+                tab.setText("Previsão");
+            } else {
+                tab.setText("Sobre");
+            }
+        }).attach();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.nav_home) {
+            // Ação para "Home"
+        } else if (id == R.id.nav_about) {
+            // Inicia a AboutActivity
+            startActivity(new Intent(this, AboutActivity.class));
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
 
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
-            if (result.getContents() == null) {
-                Toast.makeText(this, "Escaneamento cancelado", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "QR Code: " + result.getContents(), Toast.LENGTH_LONG).show();
-            }
-        }
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else super.onBackPressed();
     }
 }

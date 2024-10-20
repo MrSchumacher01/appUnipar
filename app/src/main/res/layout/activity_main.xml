@@ -1,39 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="Previsão do Tempo"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="Abas para navegação entre previsão e sobre"
-            app:tabMode="fixed" />
-
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="Navegação entre abas de previsão e informações"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:orientation="vertical">
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/green_500">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:subtitle="Previsão do Tempo"
+                app:navigationIcon="@drawable/ic_menu"
+                android:background="@color/green_500"  />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/tabBackground"
+                app:tabIndicatorColor="@android:color/white"
+                app:tabSelectedTextColor="@color/tabSelectedTextColor"
+                app:tabTextColor="@color/tabUnselectedTextColor" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/drawer_menu" />
+</androidx.drawerlayout.widget.DrawerLayout>

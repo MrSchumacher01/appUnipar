@@ -27,6 +27,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 
 public class WeatherFragment extends Fragment {
 
@@ -44,12 +47,12 @@ public class WeatherFragment extends Fragment {
 
         // Inicializando o FloatingActionButton
         FloatingActionButton fab = view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Inicia o scanner de QR code
-                startQRScanner();
-            }
+        fab.setOnClickListener(v -> {
+            IntentIntegrator integrator = IntentIntegrator.forSupportFragment(WeatherFragment.this);
+            integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
+            integrator.setPrompt("Escaneie o QR Code");
+            integrator.setBeepEnabled(true);
+            integrator.initiateScan();
         });
 
         // Inicializando o RecyclerView
@@ -132,9 +135,9 @@ public class WeatherFragment extends Fragment {
     // Função para iniciar o scanner do QR Code
     public void startQRScanner() {
         ScanOptions options = new ScanOptions();
-        options.setPrompt("Escaneie o QR Code");
-        options.setBeepEnabled(true);
-        options.setBarcodeImageEnabled(true);
+        options.setDesiredBarcodeFormats(ScanOptions.QR_CODE);
+        options.setPrompt("Escaneie um QR Code");
+        options.setCameraId(0);
         barcodeLauncher.launch(options);
     }
 }

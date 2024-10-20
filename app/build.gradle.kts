@@ -50,8 +50,8 @@ android {
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat:1.7.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -61,10 +61,12 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.material)
+    implementation (libs.material.v190)
     implementation(libs.volley)
-    implementation ("com.journeyapps:zxing-android-embedded:4.3.0")
-    implementation ("com.google.zxing:core:3.5.3")
-    implementation ("androidx.recyclerview:recyclerview:1.2.1")
+    implementation (libs.zxing.android.embedded)
+    implementation (libs.core)
+    implementation (libs.androidx.recyclerview)
+    implementation (libs.androidx.viewpager2)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

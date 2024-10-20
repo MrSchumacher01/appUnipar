@@ -5,6 +5,8 @@
     <string name="text_to_set">Texto para exibir</string>
     <string name="description_qr_code">Escanear QR Code</string>
     <string name="hint_city">Digite o nome da cidade</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
 
 
 </resources>
