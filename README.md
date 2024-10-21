@@ -117,10 +117,6 @@ private void getWeatherData(String cidade) {
 4. Envie para o repositório remoto: `git push origin minha-branch`.
 5. Abra um Pull Request.
 
-## Licença 📄
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
 ## Autor 👤
 
 Desenvolvido por **Marcos Schumacher** - Entre em contato:
