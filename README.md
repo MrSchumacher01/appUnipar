@@ -74,6 +74,6 @@ Este projeto é um aplicativo Android desenvolvido para exibir a previsão do te
 ## Autor 👤
 
 Desenvolvido por **Marcos Schumacher** - Entre em contato:
-- [LinkedIn][(https://github.com/MrSchumacher01)]
+- [LinkedIn][(https://www.linkedin.com/in/marcos-schumacher-0a300010a/)]
 - Email: marcosrschumacher@gmail.com
 
