@@ -1,6 +1,3 @@
-Aqui está um modelo para o seu `README.md`, adaptado para o projeto de previsão do tempo com Android e QR Code:
-
----
 
 # Previsão do Tempo - Aplicativo Android 🌤️
 
@@ -66,12 +63,6 @@ Este projeto é um aplicativo Android desenvolvido para exibir a previsão do te
 3. O nome da cidade será preenchido automaticamente no campo de busca.
 4. Clique em **Buscar** para visualizar a previsão do tempo.
 
-## Exemplo de Uso 🖼️
-
-| Tela Inicial | Leitor QR Code |
-|--------------|----------------|
-| ![Tela Inicial](link-para-imagem-1) | ![Leitor QR](link-para-imagem-2) |
-
 ## Contribuição 🤝
 
 1. Faça um fork do projeto.
@@ -80,36 +71,9 @@ Este projeto é um aplicativo Android desenvolvido para exibir a previsão do te
 4. Envie para o repositório remoto: `git push origin minha-branch`.
 5. Abra um Pull Request.
 
-## Licença 📄
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
 ## Autor 👤
 
 Desenvolvido por **Marcos Schumacher** - Entre em contato:
 - [LinkedIn][(https://github.com/MrSchumacher01)]
 - Email: marcosrschumacher@gmail.com
 
----
-
-Esse `README.md` está pronto para ser incluído no repositório GitHub do seu projeto. Lembre-se de personalizar as seções com seu nome, links e outras informações específicas. Para adicionar o arquivo ao seu projeto, basta seguir as etapas abaixo:
-
----
-
-### Como Adicionar o `README.md` ao Repositório
-
-1. Crie o arquivo `README.md` no diretório principal do projeto.
-   ```bash
-   touch README.md
-   ```
-
-2. Abra o arquivo e cole o conteúdo fornecido acima.
-
-3. Adicione, commit e envie para o GitHub:
-   ```bash
-   git add README.md
-   git commit -m "Adicionado README.md"
-   git push origin main
-   ```
-
-Agora, seu projeto estará bem documentado no GitHub! 🚀
