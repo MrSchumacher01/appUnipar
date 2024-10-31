@@ -99,18 +99,13 @@ public class WeatherFragment extends Fragment {
     private void getWeatherData(String cidade) {
         new Thread(() -> {
             try {
-                // Limpa a lista antes de adicionar novos resultados
-                getActivity().runOnUiThread(() -> weatherList.clear());
+                String apiKey = "6f1876a8439eb59d77020df82a7b6300";
+                String urlString = "https://api.openweathermap.org/data/2.5/weather?q=" + cidade + "&appid=" + apiKey + "&units=metric&lang=pt";
 
-                // URL da API nova
-                String urlString = "https://api.hgbrasil.com/weather?format=json-cors&key=SUA_CHAVE_API&city_name=" + cidade;
-
-                // Abre a conexão com a API
                 URL url = new URL(urlString);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
 
-                // Lê a resposta da API
                 BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 StringBuilder response = new StringBuilder();
                 String line;
@@ -119,27 +114,30 @@ public class WeatherFragment extends Fragment {
                 }
                 reader.close();
 
-                // Converte a resposta para JSON
+                // Processamento do JSON
                 String jsonResponse = response.toString();
                 JSONObject jsonObject = new JSONObject(jsonResponse);
-                JSONObject results = jsonObject.getJSONObject("results");
-                double temperature = results.getDouble("temp");
-                String description = results.getString("description");
+                JSONObject main = jsonObject.getJSONObject("main");
+                double temperature = main.getDouble("temp");
+                String cityName = jsonObject.getString("name");
 
-                // Adiciona a nova previsão à lista
-                weatherList.add(new WeatherData(cidade, temperature, description));
+                // Obtenha a descrição das condições em português
+                String description = jsonObject.getJSONArray("weather").getJSONObject(0).getString("description");
 
-                // Atualiza o RecyclerView na thread principal
-                getActivity().runOnUiThread(() -> weatherAdapter.notifyDataSetChanged());
+                // Atualize a interface com as informações
+                getActivity().runOnUiThread(() -> {
+                    weatherList.add(new WeatherData(cityName, temperature, description));
+                    weatherAdapter.notifyDataSetChanged();
+                });
 
             } catch (Exception e) {
                 e.printStackTrace();
                 getActivity().runOnUiThread(() -> {
-                    // Adiciona uma entrada de erro se houver falha na API
                     weatherList.add(new WeatherData(cidade, 0.0, "Erro ao buscar previsão."));
                     weatherAdapter.notifyDataSetChanged();
                 });
             }
         }).start();
     }
+
 }
